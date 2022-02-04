@@ -11,3 +11,6 @@ gcp-tic-tac-toe-backend
 ## Deploy to Google Cloud App Engine
 - Ensure `gcloud` is installed along with the java extensions
 - `mvn appengine:deploy`
+
+## See also
+- https://github.com/sizlo/gcp-tic-tac-toe-frontend
