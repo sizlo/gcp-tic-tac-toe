@@ -3,4 +3,5 @@
     <threadsafe>true</threadsafe>
     <runtime>java11</runtime>
     <module>backend</module>
+    <instance-class>F2</instance-class>
 </appengine-web-app>
