@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+</head>
+<body>
+<h1>Info</h1>
+<pre id="info"></pre>
+<script>
+        fetch("/api/info")
+            .then((response) => response.json())
+            .then((info) => {
+                document.getElementById("info").innerHTML = JSON.stringify(info, null, 2);
+            })
+    </script>
+</body>
+</html>

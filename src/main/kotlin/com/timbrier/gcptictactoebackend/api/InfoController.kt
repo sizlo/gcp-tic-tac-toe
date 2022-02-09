@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class InfoController {
 
-    @GetMapping("/info")
+    @GetMapping("/api/info")
     fun getInfo(): Map<String, String> {
         return mapOf(
             envEntry("GAE_VERSION"),
