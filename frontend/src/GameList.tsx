@@ -10,9 +10,9 @@ function GameList() {
 
   useEffect(() => {
     API.getGameList(
-      (result => {
+      (games => {
         setIsLoaded(true);
-        setGames(result);
+        setGames(games);
       }),
       (error) => {
         setIsLoaded(true);
