@@ -1,15 +1,16 @@
 package com.timbrier.gcptictactoebackend.api
 
+import com.timbrier.gcptictactoebackend.games.Game
+import com.timbrier.gcptictactoebackend.games.GameRepository
+import com.timbrier.gcptictactoebackend.users.UserService
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-data class Game(val id: String)
-
 @RestController
-class GameController {
+class GameController(private val usersService: UserService, private val gameRepository: GameRepository) {
 
     @RequestMapping("/api/games")
-    fun getGames(): List<Game> {
-        return listOf(Game("game-id-0"), Game("game-id-1"))
+    fun getGamesForCurrentUser(): List<Game> {
+        return gameRepository.getGamesForUser(usersService.getCurrentUser())
     }
 }

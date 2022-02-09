@@ -1,5 +1,5 @@
 export interface IGame {
-    id: string;
+    id: number;
 }
 
 export interface IUser {
