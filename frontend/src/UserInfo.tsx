@@ -7,9 +7,9 @@ function UserInfo() {
 
   useEffect(() => {
     API.getCurrentUser(
-      (user => {
+      (user) => {
         dispatch({ type: "setUser", value: user })
-      }),
+      },
       (error) => {
         console.log(error);
       }

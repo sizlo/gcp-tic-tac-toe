@@ -10,6 +10,10 @@ export interface IGame {
     nextPlayer: String;
 }
 
+export interface INewGame {
+    opponent: string;
+}
+
 export interface IUser {
     email: string;
 }

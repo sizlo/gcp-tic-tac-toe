@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Profile("local")
 class LocalGameRepository: GameRepository {
 
-    private val games = listOf(
+    private val games = mutableListOf(
         Game(
             id = 0,
             board = "XO-----OX",
@@ -22,5 +22,20 @@ class LocalGameRepository: GameRepository {
 
     override fun getGamesForUser(user: User): List<Game> {
         return games.filter { it.players.values.contains(user.email) }
+    }
+
+    override fun createGame(user: User, newGame: NewGame): Game {
+        val nextId = games.maxOf { it.id } + 1
+        val createdGame = Game(
+            id = nextId,
+            board = newBoard(),
+            players = mapOf(
+                "X" to user.email,
+                "Y" to newGame.opponent
+            ),
+            nextPlayer = "X"
+        )
+        games.add(createdGame)
+        return createdGame
     }
 }

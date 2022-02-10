@@ -1,7 +1,6 @@
 package com.timbrier.gcptictactoebackend.games
 
-import com.google.cloud.datastore.DatastoreOptions
-import com.google.cloud.datastore.Query
+import com.google.cloud.datastore.*
 import com.timbrier.gcptictactoebackend.users.User
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component
 class RealGameRepository: GameRepository {
 
     private val datastoreService = DatastoreOptions.getDefaultInstance().service
+    private val keyFactory = datastoreService.newKeyFactory().setKind("Game")
 
     override fun getGamesForUser(user: User): List<Game> {
         val query = Query.newGqlQueryBuilder(Query.ResultType.ENTITY, "SELECT * FROM Game WHERE players CONTAINS @userEmail")
@@ -20,5 +20,19 @@ class RealGameRepository: GameRepository {
         val results = datastoreService.run(query).asSequence().toList()
 
         return results.map { gameFromEntity(it) }
+    }
+
+    override fun createGame(user: User, newGame: NewGame): Game {
+        val key = keyFactory.newKey()
+        val entity = Entity.newBuilder(key)
+            .set("board", newBoard())
+            .set("xPlayer", user.email)
+            .set("yPlayer", newGame.opponent)
+            .set("nextPlayer", "X")
+            .set("players", listOf(StringValue(user.email), StringValue(newGame.opponent)))
+            .build()
+
+        val result = datastoreService.put(entity)
+        return gameFromEntity(result)
     }
 }

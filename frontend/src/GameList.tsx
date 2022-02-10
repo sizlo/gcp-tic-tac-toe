@@ -9,9 +9,9 @@ function GameList() {
 
   useEffect(() => {
     API.getGameList(
-      (gameList => {
+      (gameList) => {
         dispatch({ type: "setGameList", value: gameList })
-      }),
+      },
       (error) => {
         console.log(error);
       }
