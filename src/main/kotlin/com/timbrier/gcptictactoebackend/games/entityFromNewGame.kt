@@ -10,7 +10,7 @@ fun entityFromNewGame(key: IncompleteKey, user: User, newGame: NewGame): FullEnt
     return Entity.newBuilder(key)
         .set("board", newBoard())
         .set("xPlayer", user.email)
-        .set("yPlayer", newGame.opponent)
+        .set("oPlayer", newGame.opponent)
         .set("nextPlayer", "X")
         .set("players", listOf(StringValue(user.email), StringValue(newGame.opponent)))
         .build()

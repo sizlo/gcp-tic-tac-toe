@@ -1,4 +1,4 @@
-import { IState, IAction, IUser, IGame } from "./types";
+import { IState, IAction, IUser, IGame, IMove } from "./types";
 
 export const reducer = (state: IState, action: IAction) => {
     switch (action.type) {
@@ -17,7 +17,17 @@ export const reducer = (state: IState, action: IAction) => {
         case "setActiveGame":
             return {
                 ...state,
-                activeGame: action.value as IGame
+                activeGame: action.value as IGame,
+                newBoard: (action.value as IGame).board 
+            }
+
+        case "makeMove":
+            let move = action.value as IMove;
+            let existingBoard = state.activeGame!.board;
+            let newBoard = existingBoard.substring(0, move.index) + move.symbol + existingBoard.substring(move.index + 1);
+            return {
+                ...state,
+                newBoard: newBoard
             }
 
         case "addError":
@@ -35,6 +45,7 @@ export const reducer = (state: IState, action: IAction) => {
 export const initialState: IState = {
     gameList: undefined,
     activeGame: undefined,
+    newBoard: "",
     user: undefined,
     errors: []
 }

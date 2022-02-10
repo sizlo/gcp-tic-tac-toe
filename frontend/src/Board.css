@@ -1,0 +1,14 @@
+.Board {
+    display: flex;
+    justify-content: center;
+}
+
+.boardContent {
+    border: solid 20px #3870DE;
+    background: #3870DE;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}

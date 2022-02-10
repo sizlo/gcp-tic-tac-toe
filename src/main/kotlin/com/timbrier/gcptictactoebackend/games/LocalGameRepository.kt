@@ -14,7 +14,7 @@ class LocalGameRepository: GameRepository {
             board = "XO-----OX",
             players = mapOf(
                 "X" to "player1@tictactoe.com",
-                "Y" to "player2@tictactoe.com"
+                "O" to "player2@tictactoe.com"
             ),
             nextPlayer = "X"
         )
@@ -35,7 +35,7 @@ class LocalGameRepository: GameRepository {
             board = newBoard(),
             players = mapOf(
                 "X" to user.email,
-                "Y" to newGame.opponent
+                "O" to newGame.opponent
             ),
             nextPlayer = "X"
         )

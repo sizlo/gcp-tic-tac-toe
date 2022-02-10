@@ -1,8 +1,3 @@
-interface IPlayers {
-    X: string;
-    Y: string;
-}
-
 export interface IGame {
     id: number;
     board: string;
@@ -14,6 +9,11 @@ export interface INewGame {
     opponent: string;
 }
 
+export interface IMove {
+    index: number;
+    symbol: string;
+}
+
 export interface IUser {
     email: string;
 }
@@ -22,12 +22,13 @@ export interface IState {
     user: IUser | undefined;
     gameList: Array<IGame> | undefined;
     activeGame: IGame | undefined;
+    newBoard: string;
     errors: Array<string>;
 }
 
 export interface IAction {
     type: string;
-    value: IUser | Array<IGame> | IGame | string;
+    value: IUser | Array<IGame> | IGame | IMove | string;
 }
 
 export interface IContext {

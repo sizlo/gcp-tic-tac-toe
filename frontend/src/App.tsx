@@ -10,7 +10,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <div className="content">
+      <div className="appContent">
         <StateProvider>
           <h1>Tic Tac Toe</h1>
           <Errors />

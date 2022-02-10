@@ -22,7 +22,12 @@ function UserInfo() {
   let content = null;
 
   if (state.user) {
-    content = <div>Logged in as: {state.user.email}</div>
+    content = (
+      <React.Fragment>
+        <span className="label">Logged in as:</span>
+        <span>{state.user.email}</span>
+      </React.Fragment>
+    );
   } else {
     content = <div>Loading...</div>;
   }

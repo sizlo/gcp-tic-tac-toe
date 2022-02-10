@@ -6,14 +6,14 @@ export function getOpponent(game: IGame, currentPlayer: string): string {
   return game.players[opponentsSymbol];
 }
 
-function getPlayerSymbol(game: IGame, player: string): string {
+export function getPlayerSymbol(game: IGame, player: string): string {
     if (game.players["X"] === player) return "X";
-    if (game.players["Y"] === player) return "Y";
+    if (game.players["O"] === player) return "O";
     throw Error(`Could not determine symbol for player: ${player}`)
 }
 
 function oppositeSymbol(symbol: String): string {
-    return symbol === "X" ? "Y" : "X";
+    return symbol === "X" ? "O" : "X";
 }
 
 export function isPlayersTurn(game: IGame, player: string): boolean {
