@@ -6,4 +6,5 @@ interface GameRepository {
     fun getGamesForUser(user: User): List<Game>
     fun getGameById(id: Long): Game
     fun createGame(user: User, newGame: NewGame): Game
+    fun updateGame(game: Game): Game
 }

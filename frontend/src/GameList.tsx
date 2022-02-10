@@ -14,7 +14,11 @@ function renderListOfGames(games: Array<IGame>, user: IUser) {
 }
 
 function renderGame(game: IGame, user: IUser) {
-  return <Link key={game.id} to={`/game/${game.id}`}>Opponent: {getOpponent(game, user.email)}</Link>
+  return (
+    <div key={game.id}>
+      <Link to={`/game/${game.id}`}>Opponent: {getOpponent(game, user.email)}</Link>
+    </div>
+  );
 }
 
 function GameList() {

@@ -18,16 +18,18 @@ export const reducer = (state: IState, action: IAction) => {
             return {
                 ...state,
                 activeGame: action.value as IGame,
-                newBoard: (action.value as IGame).board 
+                newBoard: (action.value as IGame).board,
+                move: undefined
             }
 
-        case "makeMove":
+        case "stageMove":
             let move = action.value as IMove;
             let existingBoard = state.activeGame!.board;
             let newBoard = existingBoard.substring(0, move.index) + move.symbol + existingBoard.substring(move.index + 1);
             return {
                 ...state,
-                newBoard: newBoard
+                newBoard: newBoard,
+                move: move,
             }
 
         case "addError":
@@ -46,6 +48,7 @@ export const initialState: IState = {
     gameList: undefined,
     activeGame: undefined,
     newBoard: "",
+    move: undefined,
     user: undefined,
     errors: []
 }

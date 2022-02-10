@@ -8,7 +8,7 @@ fun gameFromEntity(entity: Entity): Game {
         board = entity.getString("board"),
         players = mapOf(
             "X" to entity.getString("xPlayer"),
-            "Y" to entity.getString("yPlayer"),
+            "O" to entity.getString("oPlayer"),
         ),
         nextPlayer = entity.getString("nextPlayer")
     )

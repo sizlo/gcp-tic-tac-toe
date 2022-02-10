@@ -14,6 +14,12 @@ export interface IMove {
     symbol: string;
 }
 
+export interface IMoveResponse {
+    game: IGame,
+    valid: boolean,
+    message: string
+}
+
 export interface IUser {
     email: string;
 }
@@ -22,6 +28,7 @@ export interface IState {
     user: IUser | undefined;
     gameList: Array<IGame> | undefined;
     activeGame: IGame | undefined;
+    move: IMove | undefined;
     newBoard: string;
     errors: Array<string>;
 }

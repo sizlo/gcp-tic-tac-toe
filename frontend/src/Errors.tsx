@@ -1,5 +1,6 @@
 import React from 'react';
 import { StateContext } from "./StateContext";
+import "./Errors.css";
 
 function Errors() {
     const { state } = React.useContext(StateContext);

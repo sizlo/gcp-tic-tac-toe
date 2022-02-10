@@ -32,4 +32,10 @@ class RealGameRepository: GameRepository {
         val result = datastoreService.put(entity)
         return gameFromEntity(result)
     }
+
+    override fun updateGame(game: Game): Game {
+        val entity = entityFromGame(keyFactory.newKey(game.id), game)
+        val result = datastoreService.put(entity)
+        return gameFromEntity(result)
+    }
 }

@@ -1,4 +1,4 @@
-import { IGame, IUser, INewGame } from "./types";
+import { IGame, IUser, INewGame, IMove, IMoveResponse } from "./types";
 
 function parseJson(response: Response): any {
     if (!response.ok) {
@@ -57,7 +57,28 @@ export class API {
             body: JSON.stringify(game)
         }
 
-        fetch("api/games", options)
+        fetch("/api/games", options)
+            .then((response) => parseJson(response))
+            .then(
+                (result) => {
+                    successCallback(result);
+                },
+                (error) => {
+                    errorCallback(error);
+                }
+            )
+    }
+
+    static makeMove(gameId: number, move: IMove, successCallback: (game: IMoveResponse) => void, errorCallback: (error: Error) => void) {
+        const options = { 
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(move)
+        }
+
+        fetch(`/api/games/${gameId}/move`, options)
             .then((response) => parseJson(response))
             .then(
                 (result) => {

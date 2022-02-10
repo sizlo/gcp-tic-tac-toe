@@ -4,6 +4,7 @@ import { StateContext } from "./StateContext";
 import { API } from "./api";
 import { getOpponent, getPlayerSymbol, isPlayersTurn } from "./gameUtils";
 import Board from "./Board";
+import MoveSubmit from "./MoveSubmit";
 import "./Game.css";
 
 function Game() {
@@ -44,6 +45,7 @@ function Game() {
           <span className="label">{isPlayersTurn(state.activeGame, state.user!.email) ? "Your turn" : "Opponents turn"}</span>
         </div>
         <Board />
+        <MoveSubmit />
       </React.Fragment>
     )
   } else {

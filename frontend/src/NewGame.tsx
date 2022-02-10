@@ -16,8 +16,7 @@ function NewGame() {
         API.newGame(
             newGame,
             (createdGame) => {
-                console.log(`Created game: ${createdGame.id}`);
-                navigate("/game");
+                navigate(`/game/${createdGame.id}`);
             },
             (error) => {
                 dispatch({

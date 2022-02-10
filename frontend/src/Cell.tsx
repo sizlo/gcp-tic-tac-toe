@@ -21,10 +21,10 @@ function Cell(props: CellProps) {
 
     let symbol = hasComittedSymbol ? committedSymbol : hasNewBoardSymbol ? newBoardSymbol : "";
 
-    const makeMove = function() {
+    const stageMove = function() {
         if (clickable) {
             dispatch({
-                type:"makeMove",
+                type:"stageMove",
                 value: {
                     index: props.index,
                     symbol: getPlayerSymbol(state.activeGame!, state.user!.email)
@@ -37,7 +37,7 @@ function Cell(props: CellProps) {
         <div className={`Cell ${props.borderClasses}`}>
             <div 
                 className={`cellContent ${clickable ? "clickable": ""}`}
-                onClick={ () => makeMove() }
+                onClick={ () => stageMove() }
             >
                 {symbol}
             </div>

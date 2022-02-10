@@ -42,4 +42,11 @@ class LocalGameRepository: GameRepository {
         games.add(createdGame)
         return createdGame
     }
+
+    override fun updateGame(game: Game): Game {
+        val index = games.indexOfFirst { it.id == game.id }
+        games.removeAt(index)
+        games.add(game)
+        return game
+    }
 }
