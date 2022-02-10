@@ -1,40 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { IGame } from "./types";
 import { API } from "./api"
+import { StateContext } from "./StateContext";
+import { getOpponent, isPlayersTurn } from "./gameUtils";
 
 function GameList() {
-  const [error, setError] = useState<Error | undefined>(undefined);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [games, setGames] = useState<Array<IGame>>([]);
+  const { state, dispatch } = React.useContext(StateContext);
 
   useEffect(() => {
     API.getGameList(
-      (games => {
-        setIsLoaded(true);
-        setGames(games);
+      (gameList => {
+        dispatch({ type: "setGameList", value: gameList })
       }),
       (error) => {
-        setIsLoaded(true);
-        setError(error);
+        console.log(error);
       }
     )
   }, [])
 
   let content = null;
 
-
-  if (error) {
-    content = <div>Error loading games list: {error.message}</div>;
-  } else if (!isLoaded) {
-    content = <div>Loading...</div>;
-  } else {
-    const listItems = games.map((game) => 
-      <li key={game.id}>
-        <Link to="/game">{game.id}</Link>
-      </li>
+  if (state.gameList && state.user) {
+    content = state.gameList.map((game) => 
+      <div key={game.id}>
+        <Link to="/game">
+          <span>Opponent: {getOpponent(game, state.user!.email)}</span>
+          <span>{isPlayersTurn(game, state.user!.email) ? "Your turn" : "Oponnents turn"}</span>
+        </Link>
+      </div>
     );
-    content = <ul className="GameList">{listItems}</ul>;
+  } else {
+    content = <div>Loading...</div>;
   }
 
   return (

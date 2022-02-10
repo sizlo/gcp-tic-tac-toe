@@ -10,6 +10,7 @@ class UserController(private val userService: UserService) {
 
     @RequestMapping("/api/users/current")
     fun currentUser(): User {
+        Thread.sleep(3000)
         return userService.getCurrentUser()
     }
 }

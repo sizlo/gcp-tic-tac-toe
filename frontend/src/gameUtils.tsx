@@ -1,0 +1,21 @@
+import { IGame } from "./types";
+
+export function getOpponent(game: IGame, currentPlayer: string): string {
+  const currentPlayerSymbol = getPlayerSymbol(game, currentPlayer);
+  const opponentsSymbol = oppositeSymbol(currentPlayerSymbol);
+  return game.players[opponentsSymbol];
+}
+
+function getPlayerSymbol(game: IGame, player: string): string {
+    if (game.players["X"] === player) return "X";
+    if (game.players["Y"] === player) return "Y";
+    throw Error(`Could not determine symbol for player: ${player}`)
+}
+
+function oppositeSymbol(symbol: String): string {
+    return symbol === "X" ? "Y" : "X";
+}
+
+export function isPlayersTurn(game: IGame, player: string): boolean {
+    return getPlayerSymbol(game, player) === game.nextPlayer
+}
