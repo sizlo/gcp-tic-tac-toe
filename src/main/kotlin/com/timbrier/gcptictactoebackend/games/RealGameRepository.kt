@@ -1,6 +1,7 @@
 package com.timbrier.gcptictactoebackend.games
 
-import com.google.cloud.datastore.*
+import com.google.cloud.datastore.DatastoreOptions
+import com.google.cloud.datastore.Query
 import com.timbrier.gcptictactoebackend.users.User
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
@@ -23,15 +24,7 @@ class RealGameRepository: GameRepository {
     }
 
     override fun createGame(user: User, newGame: NewGame): Game {
-        val key = keyFactory.newKey()
-        val entity = Entity.newBuilder(key)
-            .set("board", newBoard())
-            .set("xPlayer", user.email)
-            .set("yPlayer", newGame.opponent)
-            .set("nextPlayer", "X")
-            .set("players", listOf(StringValue(user.email), StringValue(newGame.opponent)))
-            .build()
-
+        val entity = entityFromNewGame(keyFactory.newKey(), user, newGame)
         val result = datastoreService.put(entity)
         return gameFromEntity(result)
     }
