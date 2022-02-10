@@ -11,7 +11,7 @@ function Errors() {
 
         content = (
             <React.Fragment>
-                <h2>Errors</h2>
+                <div className="header">Errors</div>
                 {list}
             </React.Fragment>
         );

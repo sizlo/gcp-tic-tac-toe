@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { StateContext } from "./StateContext";
 import { API } from "./api";
+import "./NewGame.css";
 
 function NewGame() {
     const { state, dispatch } = React.useContext(StateContext);

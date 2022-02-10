@@ -1,3 +1,23 @@
 .App {
   text-align: center;
+  font-size: 16px;
+}
+
+.content {
+  width:  500px;
+  margin:  auto;
+}
+
+.UserInfo, .Errors {
+  margin-bottom: 20px;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.subheader {
+  font-weight: bold;
+  font-size: 20px;
 }

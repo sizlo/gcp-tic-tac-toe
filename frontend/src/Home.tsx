@@ -1,5 +1,6 @@
 import GameList from "./GameList";
 import NewGame from "./NewGame";
+import "./Home.css";
 
 function Home() {
   return (

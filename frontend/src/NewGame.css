@@ -1,0 +1,7 @@
+label, input {
+    margin-right: 10px;
+}
+
+input[type=text] {
+    width: 200px;
+}

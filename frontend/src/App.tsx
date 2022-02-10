@@ -10,15 +10,17 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <StateProvider>
-        <h1>Tic Tac Toe</h1>
-        <Errors />
-        <UserInfo />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/game/:id" element={<Game />} />
-        </Routes>
-      </StateProvider>
+      <div className="content">
+        <StateProvider>
+          <h1>Tic Tac Toe</h1>
+          <Errors />
+          <UserInfo />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/game/:id" element={<Game />} />
+          </Routes>
+        </StateProvider>
+      </div>
     </div>
   );
 }
