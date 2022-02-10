@@ -23,6 +23,10 @@ class RealGameRepository: GameRepository {
         return results.map { gameFromEntity(it) }
     }
 
+    override fun getGameById(id: Long): Game {
+        return gameFromEntity(datastoreService.get(keyFactory.newKey(id)))
+    }
+
     override fun createGame(user: User, newGame: NewGame): Game {
         val entity = entityFromNewGame(keyFactory.newKey(), user, newGame)
         val result = datastoreService.put(entity)

@@ -14,6 +14,12 @@ export const reducer = (state: IState, action: IAction) => {
                 gameList: action.value as Array<IGame>
             }
 
+        case "setActiveGame":
+            return {
+                ...state,
+                activeGame: action.value as IGame
+            }
+
         case "addError":
             state.errors.push(action.value as string);
             return {
@@ -28,6 +34,7 @@ export const reducer = (state: IState, action: IAction) => {
 
 export const initialState: IState = {
     gameList: undefined,
+    activeGame: undefined,
     user: undefined,
     errors: []
 }

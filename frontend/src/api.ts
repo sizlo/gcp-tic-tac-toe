@@ -22,6 +22,19 @@ export class API {
             )
     }
 
+    static getGame(id: number, successCallback: (result: IGame) => void, errorCallback: (error: Error) => void ) {
+        fetch(`/api/games/${id}`)
+            .then((response) => parseJson(response))    
+            .then(
+                (result) => {
+                    successCallback(result);
+                },
+                (error) => {
+                    errorCallback(error);
+                }
+            )
+    }
+
     static getCurrentUser(successCallback: (result: IUser) => void, errorCallback: (error: Error) => void) {
         fetch("/api/users/current")
             .then((response) => parseJson(response))

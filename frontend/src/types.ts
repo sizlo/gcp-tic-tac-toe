@@ -21,12 +21,13 @@ export interface IUser {
 export interface IState {
     user: IUser | undefined;
     gameList: Array<IGame> | undefined;
+    activeGame: IGame | undefined;
     errors: Array<string>;
 }
 
 export interface IAction {
     type: string;
-    value: IUser | Array<IGame> | string;
+    value: IUser | Array<IGame> | IGame | string;
 }
 
 export interface IContext {

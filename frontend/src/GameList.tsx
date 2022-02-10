@@ -26,7 +26,7 @@ function GameList() {
   if (state.gameList && state.user) {
     content = state.gameList.map((game) => 
       <div key={game.id}>
-        <Link to="/game">
+        <Link to={`/game/${game.id}`}>
           <span>Opponent: {getOpponent(game, state.user!.email)}</span>
           <span>{isPlayersTurn(game, state.user!.email) ? "Your turn" : "Oponnents turn"}</span>
         </Link>

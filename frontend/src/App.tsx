@@ -16,7 +16,7 @@ function App() {
         <UserInfo />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/game" element={<Game />} />
+          <Route path="/game/:id" element={<Game />} />
         </Routes>
       </StateProvider>
     </div>

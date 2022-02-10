@@ -24,6 +24,10 @@ class LocalGameRepository: GameRepository {
         return games.filter { it.players.values.contains(user.email) }
     }
 
+    override fun getGameById(id: Long): Game {
+        return games.first { it.id == id }
+    }
+
     override fun createGame(user: User, newGame: NewGame): Game {
         val nextId = games.maxOf { it.id } + 1
         val createdGame = Game(
