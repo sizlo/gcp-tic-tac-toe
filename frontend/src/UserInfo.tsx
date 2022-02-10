@@ -11,7 +11,10 @@ function UserInfo() {
         dispatch({ type: "setUser", value: user })
       },
       (error) => {
-        console.log(error);
+        dispatch({
+          type: "addError",
+          value: `Error fetching current user: ${error}`
+        })
       }
     )
   }, [])

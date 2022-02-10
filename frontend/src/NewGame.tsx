@@ -4,7 +4,7 @@ import { StateContext } from "./StateContext";
 import { API } from "./api";
 
 function NewGame() {
-    const { state } = React.useContext(StateContext);
+    const { state, dispatch } = React.useContext(StateContext);
     const [opponent, setOpponent] = React.useState("");
     const navigate = useNavigate();
 
@@ -19,7 +19,10 @@ function NewGame() {
                 navigate("/game");
             },
             (error) => {
-                console.log(error);
+                dispatch({
+                    type: "addError",
+                    value: `Error creating new game: ${error}`
+                });
             }
         )
     }

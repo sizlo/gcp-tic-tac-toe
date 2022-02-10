@@ -10,10 +10,13 @@ function GameList() {
   useEffect(() => {
     API.getGameList(
       (gameList) => {
-        dispatch({ type: "setGameList", value: gameList })
+        dispatch({ type: "setGameList", value: gameList });
       },
       (error) => {
-        console.log(error);
+        dispatch({
+          type: "addError",
+          value: `Error fetching gamelist: ${error}`
+        });
       }
     )
   }, [])
