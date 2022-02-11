@@ -27,5 +27,9 @@ gcp-tic-tac-toe
 - `npm test`
 
 ## Deploy to Google Cloud App Engine
+### Backend + Frontend
 - Ensure `gcloud` is installed along with the java extensions
 - `mvn appengine:deploy`
+### Notifier cloud function
+- `cd <project_root>/notifier`
+- `gcloud functions deploy notifier --entry-point handle_message --runtime python38 --trigger-topic moves --region europe-west2`
