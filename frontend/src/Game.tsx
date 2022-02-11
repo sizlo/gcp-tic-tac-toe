@@ -61,9 +61,6 @@ function Game() {
 
     content = (
       <React.Fragment>
-        <div className="backToGames">
-          <Link to="/">Back to all games</Link>
-        </div>
         {symbolInfo}
         {opponentInfo}
         {state.activeGame!.status === "IN_PROGRESS" ? turnInfo : null}
@@ -78,6 +75,9 @@ function Game() {
 
   return (
     <div className="Game">
+      <div className="backToGames">
+        <Link to="/">Back to all games</Link>
+      </div>
       {content}
     </div>
   );
