@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { StateContext } from "./StateContext";
 import { API } from "./api";
 import { getOpponent, getPlayerSymbol, isPlayersTurn, playerWonGame, playerLostGame, playerDrewGame } from "./gameUtils";
@@ -26,7 +26,7 @@ function Game() {
         });
       }
     )
-  }, [])
+  }, []);
 
   let content = null;
 
@@ -61,6 +61,9 @@ function Game() {
 
     content = (
       <React.Fragment>
+        <div className="backToGames">
+          <Link to="/">Back to all games</Link>
+        </div>
         {symbolInfo}
         {opponentInfo}
         {state.activeGame!.status === "IN_PROGRESS" ? turnInfo : null}
