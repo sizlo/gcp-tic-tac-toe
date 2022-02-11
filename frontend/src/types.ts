@@ -1,8 +1,10 @@
 export interface IGame {
     id: number;
+    status: string;
     board: string;
     players: { [key: string]: string };
     nextPlayer: String;
+    winner: string;
 }
 
 export interface INewGame {

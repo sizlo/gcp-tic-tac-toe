@@ -1,6 +1,7 @@
 import React from "react";
 import { StateContext } from "./StateContext";
 import { API } from "./api";
+import { isPlayersTurn } from "./gameUtils";
 
 function MoveSubmit() {
     const { state, dispatch } = React.useContext(StateContext);
@@ -31,6 +32,10 @@ function MoveSubmit() {
                 });
             }
         )
+    }
+
+    if (state.activeGame!.status !== "IN_PROGRESS" || !isPlayersTurn(state.activeGame!, state.user!.email)) {
+        return <React.Fragment />
     }
 
     return (

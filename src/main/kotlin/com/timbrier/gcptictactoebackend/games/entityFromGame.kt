@@ -6,10 +6,12 @@ import com.google.cloud.datastore.StringValue
 
 fun entityFromGame(key: Key, game: Game): Entity {
     return Entity.newBuilder(key)
+        .set("status", game.status.name)
         .set("board", game.board)
         .set("xPlayer", game.players["X"])
         .set("oPlayer", game.players["O"])
         .set("nextPlayer", game.nextPlayer)
         .set("players", game.players.values.map { StringValue(it) })
+        .set("winner", game.winner)
         .build()
 }

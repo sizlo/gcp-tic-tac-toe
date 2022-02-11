@@ -2,15 +2,56 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { API } from "./api"
 import { StateContext } from "./StateContext";
-import { getOpponent, isPlayersTurn } from "./gameUtils";
+import { getOpponent, isPlayersTurn, playerWonGame, playerLostGame, playerDrewGame } from "./gameUtils";
 import { IGame, IUser } from "./types";
 
-function renderListOfGames(games: Array<IGame>, user: IUser) {
-  if (games.length > 0) {
-    return games.map((game) => renderGame(game, user));
-  } else {
-    return <div>None</div>
+function renderActiveGames(activeGames: Array<IGame>, user: IUser) {
+  if (activeGames.length === 0) {
+    return <React.Fragment />
   }
+
+  const gamesOnYourTurn = activeGames.filter((game) => isPlayersTurn(game, user.email));
+  const gamesOnOpponentsTurn = activeGames.filter((game) => !isPlayersTurn(game, user.email));
+
+  return (
+    <React.Fragment>
+      <div className="header">Active games</div>
+      {renderListOfGames("Your turn", gamesOnYourTurn, user)}
+      {renderListOfGames("Opponents turn", gamesOnOpponentsTurn, user)}
+    </React.Fragment>
+  );
+}
+
+function renderCompletedGames(completedGames: Array<IGame>, user: IUser) {
+  if (completedGames.length === 0) {
+    return <React.Fragment />
+  }
+
+  const drawnGames = completedGames.filter((game) => playerDrewGame(game, user.email));
+  const wonGames = completedGames.filter((game) => playerWonGame(game, user.email));
+  const lostGames = completedGames.filter((game) => playerLostGame(game, user.email));
+
+  return (
+    <React.Fragment>
+      <div className="header">Completed games</div>
+      {renderListOfGames("You won", wonGames, user)}
+      {renderListOfGames("You lost", lostGames, user)}
+      {renderListOfGames("You drew", drawnGames, user)}
+    </React.Fragment>
+  );
+}
+
+function renderListOfGames(subheading: string, games: Array<IGame>, user: IUser) {
+  if (games.length === 0) {
+    return <React.Fragment />
+  }
+
+  return (
+    <React.Fragment>
+      <div className="subheader">{subheading}</div>
+      {games.map((game) => renderGame(game, user))}
+    </React.Fragment>
+  );
 }
 
 function renderGame(game: IGame, user: IUser) {
@@ -41,16 +82,13 @@ function GameList() {
   let content = null;
 
   if (state.gameList && state.user) {
-    const gamesOnYourTurn = state.gameList.filter((game) => isPlayersTurn(game, state.user!.email))
-    const gamesOnOpponentsTurn = state.gameList.filter((game) => !isPlayersTurn(game, state.user!.email))
+    const activeGames = state.gameList.filter((game) => game.status === "IN_PROGRESS");
+    const completedGames = state.gameList.filter((game) => game.status !== "IN_PROGRESS");
 
     content = (
       <React.Fragment>
-        <div className="header">Active games</div>
-        <div className="subheader">Your turn</div>
-        {renderListOfGames(gamesOnYourTurn, state.user!)}
-        <div className="subheader">Opponents turn</div>
-        {renderListOfGames(gamesOnOpponentsTurn, state.user!)}
+        {renderActiveGames(activeGames, state.user!)}
+        {renderCompletedGames(completedGames, state.user!)}
       </React.Fragment>
     );
   } else {

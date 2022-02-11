@@ -19,3 +19,15 @@ function oppositeSymbol(symbol: String): string {
 export function isPlayersTurn(game: IGame, player: string): boolean {
     return getPlayerSymbol(game, player) === game.nextPlayer
 }
+
+export function playerWonGame(game: IGame, player: string): boolean {
+    return game.status === "WON" && game.winner === player;
+}
+
+export function playerLostGame(game: IGame, player: string): boolean {
+    return game.status === "WON" && game.winner !== player;
+}
+
+export function playerDrewGame(game: IGame, player: string): boolean {
+    return game.status === "DRAWN";
+}

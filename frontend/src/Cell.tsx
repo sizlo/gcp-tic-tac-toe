@@ -14,12 +14,14 @@ function Cell(props: CellProps) {
     let committedSymbol = state.activeGame!.board[props.index];
     let newBoardSymbol = state.newBoard[props.index];
 
-    let hasComittedSymbol = committedSymbol === "X" || committedSymbol === "O";
+    let hasCommittedSymbol = committedSymbol === "X" || committedSymbol === "O";
     let hasNewBoardSymbol = newBoardSymbol === "X" || newBoardSymbol === "O";
     
-    let clickable = !hasComittedSymbol && isPlayersTurn(state.activeGame!, state.user!.email);
+    let clickable = !hasCommittedSymbol 
+        && isPlayersTurn(state.activeGame!, state.user!.email) 
+        && state.activeGame!.status === "IN_PROGRESS";
 
-    let symbol = hasComittedSymbol ? committedSymbol : hasNewBoardSymbol ? newBoardSymbol : "";
+    let symbol = hasCommittedSymbol ? committedSymbol : hasNewBoardSymbol ? newBoardSymbol : "";
 
     const stageMove = function() {
         if (clickable) {
