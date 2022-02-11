@@ -5,15 +5,15 @@ import com.timbrier.gcptictactoebackend.games.GameRepository
 import com.timbrier.gcptictactoebackend.games.NewGame
 import com.timbrier.gcptictactoebackend.move.Move
 import com.timbrier.gcptictactoebackend.move.MoveResponse
-import com.timbrier.gcptictactoebackend.move.applyMove
-import com.timbrier.gcptictactoebackend.move.verifyMove
+import com.timbrier.gcptictactoebackend.move.MoveService
 import com.timbrier.gcptictactoebackend.users.UserService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class GameController(
     private val usersService: UserService,
-    private val gameRepository: GameRepository
+    private val gameRepository: GameRepository,
+    private val moveService: MoveService
 ) {
 
     @RequestMapping("/api/games")
@@ -33,14 +33,6 @@ class GameController(
 
     @PostMapping("api/games/{id}/move")
     fun makeMove(@RequestBody move: Move, @PathVariable id: Long): MoveResponse {
-        val game = gameRepository.getGameById(id)
-        val verifyResult = verifyMove(game, move, usersService.getCurrentUser())
-        return if (verifyResult.valid) {
-            val newGame = applyMove(game, move)
-            val updatedGame = gameRepository.updateGame(newGame)
-            MoveResponse(game = updatedGame, valid = true, message = "")
-        } else {
-            MoveResponse(game = game, valid = false, message = verifyResult.message)
-        }
+        return moveService.makeMove(move, id, usersService.getCurrentUser())
     }
 }
