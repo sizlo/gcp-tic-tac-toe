@@ -10,7 +10,7 @@ function MoveSubmit() {
 
     const submit = function() {
         setSubmitting(true);
-        setMessage("Submitting...");
+        setMessage("");
 
         API.makeMove(
             state.activeGame!.id, state.move!,
@@ -25,7 +25,6 @@ function MoveSubmit() {
             },
             (error) => {
                 setSubmitting(false);
-                setMessage("");
                 dispatch({
                     type: "addError",
                     value: `Error making move: ${error}`
@@ -34,13 +33,17 @@ function MoveSubmit() {
         )
     }
 
-    if (state.activeGame!.status !== "IN_PROGRESS" || !isPlayersTurn(state.activeGame!, state.user!.email)) {
-        return <React.Fragment />
-    }
+    const showButton = state.activeGame!.status === "IN_PROGRESS" && isPlayersTurn(state.activeGame!, state.user!.email)
+
+    const button = (
+        <button disabled={state.move === undefined || submitting} onClick={() => submit()}>
+            {submitting ? "Submitting..." : "Submit move"}
+        </button>
+    );
 
     return (
         <div className="MoveSubmit">
-            <button disabled={state.move === undefined || submitting} onClick={() => submit()}>Submit move</button>
+            {showButton ? button : null}
             <div>{message}</div>
         </div>
     )
