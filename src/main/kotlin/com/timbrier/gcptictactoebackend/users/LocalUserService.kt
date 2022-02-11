@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest
 class LocalUserService(private val request: HttpServletRequest): UserService {
 
     override fun getCurrentUser(): User {
-        val email = WebUtils.getCookie(request, "TTT_EMAIL")?.value ?: "default@tictactoe.com"
+        val email = request.getHeader("TTT_EMAIL")
+            ?: WebUtils.getCookie(request, "TTT_EMAIL")?.value
+            ?: "default@tictactoe.com"
         return User(email)
     }
 }
