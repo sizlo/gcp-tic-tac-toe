@@ -11,9 +11,9 @@ fun entityFromNewGame(key: IncompleteKey, user: User, newGame: NewGame): FullEnt
         .set("status", GameStatus.IN_PROGRESS.name)
         .set("board", newBoard())
         .set("xPlayer", user.email)
-        .set("oPlayer", newGame.opponent)
+        .set("oPlayer", newGame.opponent.lowercase())
         .set("nextPlayer", "X")
-        .set("players", listOf(StringValue(user.email), StringValue(newGame.opponent)))
+        .set("players", listOf(StringValue(user.email), StringValue(newGame.opponent.lowercase())))
         .set("winner", "")
         .build()
 }

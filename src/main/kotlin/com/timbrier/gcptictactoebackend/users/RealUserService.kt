@@ -12,6 +12,6 @@ class RealUserService: UserService {
 
     override fun getCurrentUser(): User {
         val googleUser = googleUserService.currentUser!!
-        return User(email = googleUser.email)
+        return User(email = googleUser.email.lowercase())
     }
 }
