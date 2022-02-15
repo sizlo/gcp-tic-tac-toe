@@ -30,6 +30,9 @@ gcp-tic-tac-toe
 ### Backend + Frontend
 - Ensure `gcloud` is installed along with the java extensions
 - `mvn appengine:deploy`
-### Notifier cloud function
+### notifier cloud function
 - `cd <project_root>/notifier`
 - `gcloud functions deploy notifier --entry-point handle_message --runtime python38 --trigger-topic moves --region europe-west2`
+### completed-game-deleter cloud function
+- `cd <project_root/completed-game-deleter`
+- `gcloud functions deploy completed-game-deleter --entry-point handle_message --runtime python38 --trigger-topic delete-completed-games --region europe-west2`

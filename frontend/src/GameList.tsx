@@ -37,6 +37,7 @@ function renderCompletedGames(completedGames: Array<IGame>, user: IUser) {
       {renderListOfGames("You won", wonGames, user)}
       {renderListOfGames("You lost", lostGames, user)}
       {renderListOfGames("You drew", drawnGames, user)}
+      <div className="note">Completed games are deleted daily at midnight UTC</div>
     </React.Fragment>
   );
 }

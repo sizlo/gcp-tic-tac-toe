@@ -4,7 +4,7 @@
 }
 
 .appContent {
-  width:  500px;
+  width:  400px;
   margin:  auto;
 }
 
@@ -26,4 +26,8 @@
 .label {
     font-weight: bold;   
     margin-right: 5px;
+}
+
+.note {
+    color: grey;
 }
